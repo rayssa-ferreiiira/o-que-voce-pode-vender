@@ -106,7 +106,7 @@ Regras gerais:
 
 export const CAMPOS_MAPA = {
   nome: "nome que ela contou",
-  hipotese: "frase: a hipótese confirmada na conversa no formato [área] pra [quem], até 14 palavras (encurte sem mudar direção nem público). porque: até 2 frases com a razão prioritária",
+  hipotese: "frase: a hipótese confirmada na conversa no formato [área] pra [quem], com NO MÁXIMO 14 palavras. Se a frase confirmada for maior, encurte o quem para a situação essencial, sem mudar direção nem público (ex.: \"Organização do cuidado de pais idosos pra filhas no susto do começo\"). porque: até 2 frases com a razão prioritária",
   sintese: "um parágrafo corrido de 3 a 5 frases contando quem ela é pelas cenas, sem listar as histórias uma a uma",
   trajetoria: "3 a 5 histórias. periodo: época ou fase de vida que ela contou (ex.: 2017, no varejo / Volta da licença), ou vazio se não disse. situacao até 20 palavras, oQueFez até 30, resultado até 25 com número ou antes e depois. Não crie história para completar",
   padroes: "2 a 4 fios reais entre histórias. padrao: frase direta de até 14 palavras no presente. evidencias: provas curtas. historias: índices (base zero) da trajetoria que sustentam",
@@ -118,5 +118,5 @@ export const CAMPOS_MAPA = {
   publico: "quem, momento, ondeEsta (só se contado, senão vazio), frase (fala real que ela relatou do público, sem aspas, ou vazio), precisa",
   credibilidade: "3 a 5 frases em primeira pessoa, até 22 palavras cada, uma ideia só, cada uma com tempo, número, pessoas ou antes e depois contado",
   descobrir: "a ponte para a Trama: exatamente os 6 temas nesta ordem: dores, posicionamento, metodo, produto, oferta, primeira venda. Uma pergunta por tema, até 25 palavras, específica da hipótese e das histórias dela (cite o público, a situação ou as pessoas que ela contou). Não responda as perguntas",
-  lacunas: "lacunas honestas: secao (nome do campo) e texto curto. Lista vazia se não houver",
+  lacunas: "no máximo 2 lacunas, só as que mais importam para ela decidir, cada uma com secao (nome do campo) e texto de até 25 palavras. Lista vazia se não houver",
 } as const;

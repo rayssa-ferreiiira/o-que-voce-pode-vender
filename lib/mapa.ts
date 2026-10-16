@@ -49,6 +49,7 @@ const VAZIOS = new Set(["sem data", "não informado", "nao informado", "n/a", "-
 
 function normalizar(m: MapaParcial): MapaParcial {
   const r = limpar(m);
+  if (r.lacunas) r.lacunas = r.lacunas.filter((l, i, a) => a.findIndex((x) => x.texto === l.texto) === i).slice(0, 3);
   if (r.trajetoria) r.trajetoria = r.trajetoria.slice(0, 5).map((h) => ({ ...h, periodo: VAZIOS.has(h.periodo.trim().toLowerCase()) ? "" : h.periodo }));
   if (r.padroes && r.trajetoria) {
     const n = r.trajetoria.length;
