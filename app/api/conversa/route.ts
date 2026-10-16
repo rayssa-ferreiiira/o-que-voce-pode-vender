@@ -22,6 +22,15 @@ const NOTA_PRIMEIRA = "Esta é a primeira mensagem dela. Aproveite tudo o que ve
 const NOTA_FRASE = "Ela clicou numa frase de início. Acolha a frase de um jeito que desperte curiosidade e mostre que essa pergunta tem resposta na história dela. Depois pergunte o primeiro nome, de forma leve, na mesma mensagem.";
 
 export async function POST(req: Request) {
+  try {
+    return await turno(req);
+  } catch (e) {
+    console.error("conversa POST", e);
+    return NextResponse.json({ erro: "Não consegui enviar agora. Tenta de novo.", detalhe: String(e instanceof Error ? e.message : e).slice(0, 300) }, { status: 500 });
+  }
+}
+
+async function turno(req: Request) {
   if (!(await temAcesso())) return NextResponse.json({ erro: "Seu acesso não vale mais. Abra o link da sua compra de novo." }, { status: 401 });
   const { texto: bruto } = (await req.json().catch(() => ({}))) as { texto?: string };
   const texto = (bruto ?? "").trim().slice(0, 4000);
