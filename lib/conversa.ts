@@ -39,7 +39,7 @@ export function provasSuficientes(p?: Provas): boolean {
 }
 
 function faltando(p?: Provas): string {
-  if (!p || historiasComResultado(p) < 3) return "Ainda falta material concreto, mas não peça de novo 'uma situação'. Chegue por outro ângulo: o que ela faz fácil e os outros travam, no que ela é boa sem perceber, alguém que ela ajudou a crescer, o começo da carreira, algo fora do trabalho. A história vem junto.";
+  if (!p || historiasComResultado(p) < 3) return "Ainda falta prova concreta, mas não peça \"uma situação\" nem \"um momento em que\". Proponha você uma cena típica do mundo dela, com o resultado que costuma acontecer, e pergunte se já viveu algo assim (ex.: \"Imagino que já pegou clínica gastando muito em anúncio com a agenda vazia. Quanto mudou depois que você mexeu?\"). Se ela já disse não a algo, não volte nisso.";
   if (distintos(p.padroes) < 2) return "Já tem histórias de fases diferentes. Antes de pedir mais, devolva em voz alta os fios que ligam essas histórias.";
   if (!p.demanda.trim()) return "Falta entender o contexto em que ela rende: que tipo de situação, de gente e de ritmo. Devolva o que já aparece nas cenas e confirme com ela.";
   if (!p.jeitoAtuar.trim()) return "Falta entender como ela gosta de ajudar: naquela história ela fez por alguém, fez junto ou mostrou o caminho? Puxe naturalmente.";
