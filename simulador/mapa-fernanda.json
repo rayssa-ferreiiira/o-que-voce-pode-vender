@@ -1,0 +1,48 @@
+{
+  "nome": "Fernanda Albuquerque",
+  "hipotese": {
+    "frase": "Gestão do fechamento contábil pra coordenadoras recém-promovidas",
+    "porque": "A procura de coordenadoras se junta às oito que passaram a fechar sem depender de você. Essa possibilidade corresponde ao que você confirmou querer fazer: acompanhar até conseguirem sozinhas, não vender execução técnica."
+  },
+  "sintese": "Você é contadora há 14 anos e hoje coordena o fechamento de um grupo com várias empresas. Ao organizar o calendário e fazer junto, você ajuda o fechamento a não depender de uma única pessoa: cada um sabe sua parte, o time cobra os prazos e as coordenadoras tomam decisões sem chamar você para tudo. A redução de 12 para 5 dias úteis aparece junto de uma equipe que passou a cobrar os prazos sem seus lembretes.",
+  "trajetoria": [
+    { "periodo": "2012 a 2016, na indústria", "situacao": "Você era analista. Quem concentrava o fechamento saiu, ninguém sabia a ordem e o fechamento atrasava todo mês.", "oQueFez": "Levantou cada conferência, colocou a sequência num calendário e fez junto com três analistas.", "resultado": "O fechamento passou a sair na data combinada, mesmo com trocas de função." },
+    { "periodo": "2017, no varejo", "situacao": "Ao assumir como supervisora, encontrou um fechamento de 12 dias úteis, deixando a diretoria sem os números do mês.", "oQueFez": "Conversou com outras áreas, combinou prazos e redesenhou o calendário das seis pessoas do time.", "resultado": "Em dois meses, o fechamento caiu de 12 para 5 dias úteis." },
+    { "periodo": "", "situacao": "Analistas eram promovidas a coordenadoras sem saber conduzir o fechamento e chamavam você para decidir tudo.", "oQueFez": "Sentava com cada uma no primeiro fechamento e fazia junto. No segundo, perguntava o que ela faria primeiro.", "resultado": "Oito analistas viraram coordenadoras e passaram a fechar sem depender de você." }
+  ],
+  "padroes": [
+    { "padrao": "Organiza a sequência no calendário e faz junto com o time.", "evidencias": ["Na indústria, fez junto com três analistas.", "No varejo, fez junto os primeiros fechamentos."], "historias": [0, 1] },
+    { "padrao": "Ajuda a entender o que fazer primeiro.", "evidencias": ["Explicava o porquê da ordem.", "Perguntava o que ela faria primeiro."], "historias": [0, 2] },
+    { "padrao": "Ajuda o fechamento a não depender de uma única pessoa.", "evidencias": ["Cada um passou a saber sua parte.", "Oito coordenadoras fecham sem você."], "historias": [0, 1, 2] }
+  ],
+  "resolve": ["Fechamento que atrasa todo mês.", "Coordenadoras recém-promovidas que não aprenderam a coordenar prazos e time.", "Rotina concentrada numa pessoa só.", "Prazos com outras áreas que ninguém cumpre."],
+  "sinaisDemanda": [
+    { "sinal": "Coordenadoras novas procuram você porque o fechamento atrasa e elas não sabem conduzir o time.", "tipo": "procura" },
+    { "sinal": "Outras empresas do grupo perguntam como você organiza o calendário.", "tipo": "reconhecimento" },
+    { "sinal": "Uma ex-analista propôs pagar pela ajuda ao time. Não houve acordo nem pagamento.", "tipo": "procura" },
+    { "sinal": "Promoções sem ninguém ensinar a coordenar prazos e time.", "tipo": "problema recorrente" }
+  ],
+  "possibilidades": [
+    { "direcao": "Gestão do fechamento contábil pra coordenadoras recém-promovidas", "sinais": { "experiencia": 3, "reconhecimento": 3, "publico": 3, "aplicacao": 3 }, "fundamentos": ["Oito analistas viraram coordenadoras e fecham sem você.", "A procura aparece entre coordenadoras novas e colegas do grupo.", "Uma ex-analista propôs pagar."] },
+    { "direcao": "Calendário de fechamento pra empresas médias em crescimento", "sinais": { "experiencia": 3, "reconhecimento": 1, "publico": 2, "aplicacao": 2 }, "fundamentos": ["No varejo, o fechamento caiu de 12 para 5 dias úteis.", "Ainda não apareceu quem procure você por esse caminho."] }
+  ],
+  "modelos": [
+    { "modelo": "mentora", "aderencia": 3, "porque": "No primeiro fechamento você fazia junto. No segundo, perguntava o que ela faria primeiro.", "comoSeria": "Acompanhar coordenadoras recém-promovidas até conduzirem o calendário, os prazos e o time sem você." },
+    { "modelo": "consultora", "aderencia": 2, "porque": "Na indústria e no varejo você reorganizou a rotina com os times.", "comoSeria": "Reorganizar o calendário e os prazos entre áreas com a coordenadora e o time." },
+    { "modelo": "estrategista", "aderencia": 0, "porque": "Você disse que não quer só entregar um plano e sumir.", "comoSeria": "Desenhar a sequência e os prazos sem executar." },
+    { "modelo": "especialista", "aderencia": 1, "porque": "Você afirmou que não quer vender execução técnica de fechamento.", "comoSeria": "Executar as conferências do fechamento contábil." }
+  ],
+  "modeloRecomendado": "mentora",
+  "publico": { "quem": "Coordenadoras recém-promovidas, antes analistas, em empresas médias e grupos com várias unidades.", "momento": "Nos primeiros seis meses no cargo, com um fechamento herdado que atrasa todo mês.", "ondeEsta": "Nas empresas do grupo e no LinkedIn.", "frase": "Fui promovida, herdei um fechamento que atrasa todo mês e ninguém me ensinou a coordenar isso.", "precisa": "Um jeito de conduzir a equipe sem ser a única que sabe fazer." },
+  "credibilidade": ["Sou contadora há 14 anos.", "No varejo, ajudei a reduzir o fechamento de 12 para 5 dias úteis em dois meses.", "Acompanhei oito analistas que viraram coordenadoras e hoje fecham sem depender de mim."],
+  "descobrir": [
+    { "tema": "dores", "pergunta": "Como as coordenadoras recém-promovidas descrevem o que sentem ao herdar um fechamento atrasado?" },
+    { "tema": "posicionamento", "pergunta": "O que faz uma coordenadora preferir você a um curso de fechamento contábil?" },
+    { "tema": "metodo", "pergunta": "Quais passos você repetiu com as oito coordenadoras até conduzirem sozinhas?" },
+    { "tema": "produto", "pergunta": "Esse acompanhamento cabe em quantos fechamentos, individual ou em grupo?" },
+    { "tema": "oferta", "pergunta": "Quem decide pagar: a coordenadora ou a gestora dela?" },
+    { "tema": "primeira venda", "pergunta": "Com qual das coordenadoras que já te procuraram você poderia testar isso primeiro?" }
+  ],
+  "lacunas": [{ "secao": "sinaisDemanda", "texto": "No convite da ex-analista, não ficou claro se ela queria aprender a conduzir ou que você organizasse o fechamento por ela." }],
+  "geradoEm": "2026-10-16T12:00:00.000Z"
+}

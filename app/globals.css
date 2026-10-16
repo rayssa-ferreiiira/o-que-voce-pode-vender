@@ -1,0 +1,13 @@
+:root{
+  --papel:#F6F0E6; --linho:#EDE3D3; --linho-2:#E3D6C2;
+  --tinta:#2B1D17; --argila:#7D6050; --fio:#C9B8A3;
+  --terracota:#C2562F; --oliva:#61704F; --ocre:#B4863A;
+  --serif:'Lora',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--papel);color:var(--tinta)}
+body{font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit;color:inherit}
+a{color:var(--terracota)}
+:focus-visible{outline:2px solid var(--terracota);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
