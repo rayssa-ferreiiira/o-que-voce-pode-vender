@@ -69,6 +69,7 @@ export function montarNota(c: { nome: string; mensagens: Mensagem[]; fase: strin
     partes.push("A conversa já está longa. Feche agora com o que tem: devolva as possibilidades, diga com honestidade onde há pouca informação e apresente a hipótese prioritária em negrito numa linha própria, perguntando se soa como ela.");
   } else {
     partes.push(faltando(provas));
+    partes.push("Ainda não apresente a frase final em negrito: esboços só em prosa.");
   }
   return partes.join(" ");
 }
@@ -114,18 +115,23 @@ function paraMensagensApi(m: Mensagem[]) {
   return saida;
 }
 
+/** marca a conversa para cache: a próxima fala reaproveita tudo o que veio antes */
+function comCache(m: { role: "user" | "assistant"; content: string }[]) {
+  return m.map((x, i) => (i === m.length - 2 && x.role === "assistant" ? { role: x.role, content: [{ type: "text" as const, text: x.content, cache_control: { type: "ephemeral" as const } }] } : x));
+}
+
 /** a fala da Ray em streaming */
 export async function falarRay(c: Conversa, mensagens: Mensagem[], nota: string, onDelta: (t: string) => void): Promise<string> {
   const inicio = Date.now();
   const stream = anthropic().messages.stream({
     model: MODELO_RAY,
     max_tokens: 4000,
-    output_config: { effort: "low" },
+    thinking: { type: "disabled" },
     system: [
       { type: "text", text: PROMPT_RAY, cache_control: { type: "ephemeral" } },
       { type: "text", text: notaRay(nota) },
     ],
-    messages: paraMensagensApi(mensagens),
+    messages: comCache(paraMensagensApi(mensagens)),
   });
   let texto = "";
   let pendente = "";
