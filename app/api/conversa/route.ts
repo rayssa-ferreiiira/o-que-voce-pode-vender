@@ -73,7 +73,7 @@ export async function POST(req: Request) {
 
         // a frase em negrito só vale como hipótese quando o fechamento estava liberado
         const frase = fraseEmNegrito(resposta);
-        const liberado = provasSuficientes(conversa.estado.provas) || clientes(mensagens) >= 24 || conversa.fase === "hipotese";
+        const liberado = provasSuficientes(conversa.estado.provas) || clientes(mensagens) >= 20 || conversa.fase === "hipotese";
         const fase = frase && liberado ? "hipotese" : conversa.fase;
         await salvarConversa(conversa.id, { mensagens: comRay, fase, estado: { ...conversa.estado, frase: frase && liberado ? frase : conversa.estado.frase } });
         enviar({ t: "fim", fase });
