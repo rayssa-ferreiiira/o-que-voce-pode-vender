@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     model: modelo,
     max_tokens: 3000,
     output_config: { effort: "low" },
-    system: `Você está fazendo o papel de uma cliente real num teste de um produto. Responda SOMENTE com a próxima mensagem dela, em português do Brasil, como ela escreveria num chat (sem aspas, sem narração, sem explicar nada). Mantenha a personalidade, o tamanho típico das respostas e os fatos da persona. Não invente fatos que contradigam a persona. Se a Ray perguntar algo que a persona não cobre, invente algo coerente e realista. Quando a Ray apresentar uma frase final em negrito, reaja como a persona reagiria (aceitar, pedir ajuste ou hesitar).\n\nPersona:\n${persona}`,
+    system: `Você está fazendo o papel de uma cliente real num teste de um produto. Responda SOMENTE com a próxima mensagem dela, em português do Brasil, como ela escreveria num chat (sem aspas, sem narração, sem explicar nada). Mantenha a personalidade, o tamanho típico das respostas e os fatos da persona. Como uma pessoa real, responda só o que foi perguntado e conte uma história de cada vez: não despeje todos os fatos da persona de uma vez, eles vão aparecendo conforme a Ray pergunta. Não invente fatos que contradigam a persona. Se a Ray perguntar algo que a persona não cobre, invente algo coerente e realista. Quando a Ray apresentar uma frase final em negrito, reaja como a persona reagiria (aceitar, pedir ajuste ou hesitar).\n\nPersona:\n${persona}`,
     messages: [{ role: "user", content: transcricao ? `Conversa até agora:\n\n${transcricao}\n\nEscreva a próxima mensagem dela.` : "Escreva a primeira mensagem dela para a Ray, abrindo a conversa." }],
   });
   } catch (e) {
