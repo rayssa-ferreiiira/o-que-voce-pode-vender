@@ -60,7 +60,7 @@ async function turno(req: Request) {
         // frase já apresentada: confere a confirmação antes de a Ray falar
         if (conversa.fase === "hipotese") {
           const a = await anotar(conversa, mensagens);
-          if (a?.confirmou) {
+          if (a?.confirmou && !a.pediuAjuste) {
             // ajuste depois do Mapa: o email já existe, só refaz
             const fase = conversa.email ? "concluida" : "email";
             const fala = conversa.email ? "Fechado. Já estou refazendo o seu Mapa com a frase nova." : FALA_EMAIL;
