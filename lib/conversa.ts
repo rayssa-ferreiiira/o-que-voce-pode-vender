@@ -66,7 +66,7 @@ export function montarNota(c: { nome: string; mensagens: Mensagem[]; fase: strin
   if (provas && !provas.foraDoTrabalho && historiasComResultado(provas) >= 2) partes.push("Se fizer sentido agora, abra uma vez a porta para a vida fora do trabalho, com exemplos dentro de uma pergunta natural.");
   if (provasSuficientes(provas)) {
     partes.push("Você já tem material para fechar. Faça a devolutiva das possibilidades que a conversa sustenta, comparando os sinais, e apresente a hipótese prioritária em negrito numa linha própria, no formato [área] pra [quem], com o porquê e a pergunta se soa como ela.");
-  } else if (clientes(c.mensagens) >= 20) {
+  } else if (clientes(c.mensagens) >= 18) {
     partes.push("A conversa já está longa. Feche agora com o que tem: devolva as possibilidades, diga com honestidade onde há pouca informação e apresente a hipótese prioritária em negrito numa linha própria, perguntando se soa como ela.");
   } else {
     partes.push(faltando(provas));

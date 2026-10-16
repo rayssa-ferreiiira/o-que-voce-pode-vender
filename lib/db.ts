@@ -56,7 +56,11 @@ create table if not exists buscas (id bigserial primary key, quem text not null,
 `;
 
 export function migrar() {
-  return (globalThis.__migrado ??= sqlCliente().unsafe(MIGRACAO).then(() => undefined).catch((e) => {
+  // várias instâncias podem subir juntas: a trava evita duas migrações ao mesmo tempo
+  return (globalThis.__migrado ??= sqlCliente().begin(async (tx) => {
+    await tx`select pg_advisory_xact_lock(424242)`;
+    await tx.unsafe(MIGRACAO);
+  }).then(() => undefined).catch((e) => {
     globalThis.__migrado = undefined;
     throw e;
   }));
