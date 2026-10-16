@@ -61,17 +61,16 @@ export function montarNota(c: { nome: string; mensagens: Mensagem[]; fase: strin
     else partes.push("A frase da hipótese já foi apresentada. Responda ao que ela trouxe e, se mudar alguma palavra, apresente a frase nova em negrito. Senão, não repita a frase inteira.");
     return partes.join(" ");
   }
+  const longa = clientes(c.mensagens) >= 14;
+  if (provasSuficientes(provas) || longa) {
+    // fechamento: instrução única e direta, sem outras orientações competindo
+    return `Feche nesta mensagem, sem nova pergunta de investigação. Devolva em poucas frases os padrões e as possibilidades que a conversa sustenta, comparando os sinais${longa && !provasSuficientes(provas) ? " e dizendo com honestidade onde há pouca informação" : ""}, e apresente a hipótese prioritária em negrito numa linha própria, no formato [área] pra [quem], com até 14 palavras. Termine perguntando se soa como ela.`;
+  }
   if (a?.mesmaCena) partes.push("Chega dessa cena. Proponha o que você está enxergando e amplie para outra situação ou fase.");
   if ((a?.trocasSemDevolutiva ?? 0) >= 5) partes.push("Já faz várias trocas sem devolutiva. Faça agora uma mini devolutiva do que está ficando claro, em 2 ou 3 frases.");
   if (provas && !provas.foraDoTrabalho && historiasComResultado(provas) >= 2) partes.push("Se fizer sentido agora, abra uma vez a porta para a vida fora do trabalho, com exemplos dentro de uma pergunta natural.");
-  if (provasSuficientes(provas)) {
-    partes.push("Você já tem material para fechar. Faça a devolutiva das possibilidades que a conversa sustenta, comparando os sinais, e apresente a hipótese prioritária em negrito numa linha própria, no formato [área] pra [quem], com o porquê e a pergunta se soa como ela.");
-  } else if (clientes(c.mensagens) >= 18) {
-    partes.push("A conversa já está longa. Feche agora com o que tem: devolva as possibilidades, diga com honestidade onde há pouca informação e apresente a hipótese prioritária em negrito numa linha própria, perguntando se soa como ela.");
-  } else {
-    partes.push(faltando(provas));
-    partes.push("Ainda não apresente a frase final em negrito: esboços só em prosa.");
-  }
+  partes.push(faltando(provas));
+  partes.push("Ainda não apresente a frase final em negrito: esboços só em prosa.");
   return partes.join(" ");
 }
 
