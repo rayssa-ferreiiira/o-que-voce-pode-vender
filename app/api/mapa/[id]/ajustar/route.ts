@@ -11,11 +11,11 @@ export async function POST(_req: Request, { params }: { params: Promise<{ id: st
   const jar = await cookies();
   const c = await buscarConversa(id);
   if (!c) return NextResponse.json({ erro: "Mapa não encontrado." }, { status: 404 });
-  if (jar.get(COOKIE_CONVERSA)?.value !== id) return NextResponse.json({ erro: "Só dá pra ajustar a frase no navegador onde a conversa aconteceu." }, { status: 403 });
   if (c.mapa_status === "erro") {
     after(() => gerarMapa(id));
     return NextResponse.json({ ok: true, refazendo: true });
   }
+  if (jar.get(COOKIE_CONVERSA)?.value !== id) return NextResponse.json({ erro: "Só dá pra ajustar a frase no navegador onde a conversa aconteceu." }, { status: 403 });
   const frase = c.mapa?.hipotese?.frase || c.estado.frase || "";
   await salvarConversa(id, {
     fase: "hipotese",
