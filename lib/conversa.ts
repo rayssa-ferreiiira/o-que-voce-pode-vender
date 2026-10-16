@@ -10,7 +10,7 @@ export const FRASES_INICIO = [
   "Quero criar algo meu, mas não sei por onde começar",
 ];
 
-export const FALA_EMAIL = "Que bom que soa como você. Agora coloca seu email aqui embaixo: é ele que libera e guarda o seu Mapa de Possibilidades. Enquanto isso, eu já começo a montar.";
+export const FALA_EMAIL = "Que bom que faz sentido pra você. Agora coloca seu email aqui embaixo: é ele que libera e guarda o seu Mapa de Possibilidades. Enquanto isso, eu já começo a montar.";
 
 type Anotacao = {
   nome: string;
@@ -56,15 +56,15 @@ export function montarNota(c: { nome: string; mensagens: Mensagem[]; fase: strin
   const partes: string[] = [];
   if (a?.nota) partes.push(a.nota);
   if (c.fase === "hipotese") {
-    if (a?.pediuAjuste) partes.push("Ela pediu um ajuste na frase. Ajuste palavra por palavra, sem recomeçar, e apresente a frase ajustada em negrito numa linha própria, perguntando se agora soa como ela.");
-    else if (clientes(c.mensagens) - (c.estado?.fraseEm ?? clientes(c.mensagens)) >= 2) partes.push("Ela ainda não respondeu se a frase soa como ela. Acolha o que ela trouxe em uma frase, integre se mudar algo, e traga de novo a frase em negrito numa linha própria, perguntando de forma direta se soa como ela.");
+    if (a?.pediuAjuste) partes.push("Ela pediu um ajuste na frase. Ajuste palavra por palavra, sem recomeçar, e apresente a frase ajustada em negrito numa linha própria, perguntando se agora faz sentido pra ela.");
+    else if (clientes(c.mensagens) - (c.estado?.fraseEm ?? clientes(c.mensagens)) >= 2) partes.push("Ela ainda não respondeu se a frase faz sentido pra ela. Acolha o que ela trouxe em uma frase, integre se mudar algo, e traga de novo a frase em negrito numa linha própria, perguntando de forma direta se faz sentido pra ela.");
     else partes.push("A frase da hipótese já foi apresentada. Responda ao que ela trouxe e, se mudar alguma palavra, apresente a frase nova em negrito. Senão, não repita a frase inteira.");
     return partes.join(" ");
   }
   const longa = clientes(c.mensagens) >= 14;
   if (provasSuficientes(provas) || longa) {
     // fechamento: instrução única e direta, sem outras orientações competindo
-    return `Feche nesta mensagem, sem nova pergunta de investigação. Devolva em poucas frases os padrões e as possibilidades que a conversa sustenta, comparando os sinais${longa && !provasSuficientes(provas) ? " e dizendo com honestidade onde há pouca informação" : ""}, e apresente a hipótese prioritária em negrito numa linha própria, no formato [área] pra [quem], com até 14 palavras. Termine perguntando se soa como ela.`;
+    return `Feche nesta mensagem, sem nova pergunta de investigação. Devolva em poucas frases os padrões e as possibilidades que a conversa sustenta, comparando os sinais${longa && !provasSuficientes(provas) ? " e dizendo com honestidade onde há pouca informação" : ""}, e apresente a hipótese prioritária em negrito numa linha própria, no formato [área] pra [quem], com até 14 palavras. Termine perguntando se faz sentido pra ela.`;
   }
   if (a?.mesmaCena) partes.push("Chega dessa cena. Proponha o que você está enxergando e amplie para outra situação ou fase.");
   if ((a?.trocasSemDevolutiva ?? 0) >= 5) partes.push("Já faz várias trocas sem devolutiva. Faça agora uma mini devolutiva do que está ficando claro, em 2 ou 3 frases.");

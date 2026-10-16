@@ -19,7 +19,7 @@ export async function POST(_req: Request, { params }: { params: Promise<{ id: st
   const frase = c.mapa?.hipotese?.frase || c.estado.frase || "";
   await salvarConversa(id, {
     fase: "hipotese",
-    mensagens: [...c.mensagens, { autor: "ray", texto: `Vamos ajustar. Hoje a frase está assim:\n\n**${frase}**\n\nO que não soa como você?`, em: new Date().toISOString() }],
+    mensagens: [...c.mensagens, { autor: "ray", texto: `Vamos ajustar. Hoje a frase está assim:\n\n**${frase}**\n\nO que não faz sentido pra você?`, em: new Date().toISOString() }],
   });
   const r = NextResponse.json({ ok: true });
   r.cookies.set(COOKIE_CONVERSA, id, opcoesCookie);
