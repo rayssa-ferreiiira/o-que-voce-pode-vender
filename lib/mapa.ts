@@ -86,7 +86,8 @@ export async function gerarMapa(id: string): Promise<void> {
       system: `${PROMPT_MAPA}\n\nNesta chamada preencha somente estes campos (outra chamada preenche os demais ao mesmo tempo):\n${instrucoes(campos)}`,
       user,
       schema: schemaDe(campos),
-      maxTokens: 6000,
+      maxTokens: 16000,
+      esforco: "medium",
     }).then(async (parte) => {
       // descarta se a conversa recomeçou a geração no meio
       const atual = await buscarConversa(id);

@@ -82,7 +82,8 @@ export async function anotar(c: Conversa, mensagens: Mensagem[]): Promise<Anotac
       system: PROMPT_ANOTADOR,
       user: `Conversa até agora:\n\n${transcricao}`,
       schema: SCHEMA_ANOTADOR,
-      maxTokens: 2500,
+      maxTokens: 6000,
+      esforco: "low",
     });
   } catch (e) {
     console.error("anotador", e);
@@ -117,7 +118,8 @@ export async function falarRay(c: Conversa, mensagens: Mensagem[], nota: string,
   const inicio = Date.now();
   const stream = anthropic().messages.stream({
     model: MODELO_RAY,
-    max_tokens: 900,
+    max_tokens: 4000,
+    output_config: { effort: "low" },
     system: [
       { type: "text", text: PROMPT_RAY, cache_control: { type: "ephemeral" } },
       { type: "text", text: notaRay(nota) },

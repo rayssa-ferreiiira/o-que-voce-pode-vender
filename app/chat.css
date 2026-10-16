@@ -12,7 +12,8 @@
 .boas-vindas .promessa{margin-top:12px;color:var(--argila);font-size:17px;max-width:34rem}
 .aviso-inicio{margin-top:22px;max-width:30rem;font-size:14px;color:var(--argila);background:var(--linho);padding:12px 16px;border-radius:12px;text-align:left;display:flex;gap:10px}
 .aviso-inicio::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--ocre);margin-top:8px}
-.inicios{display:grid;gap:10px;margin-top:28px;width:100%;max-width:30rem}
+.rotulo-inicios{margin-top:28px;font-size:13px;color:var(--argila)}
+.inicios{display:grid;gap:10px;margin-top:10px;width:100%;max-width:30rem}
 .inicios button{text-align:left;background:var(--papel);border:1px solid var(--fio);border-radius:14px;padding:13px 16px;font-size:15px;cursor:pointer;transition:border-color .15s,background .15s}
 .inicios button:hover{border-color:var(--terracota);background:#fff8}
 

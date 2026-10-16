@@ -159,6 +159,7 @@ export default function Home() {
             <h1>O que você pode vender?</h1>
             <p className="promessa">Descubra o que você pode vender a partir da experiência que já tem, no trabalho e fora dele.</p>
             <p className="aviso-inicio">Esta é uma conversa investigativa. A Ray vai fazer bastante pergunta pra entender a sua trajetória, porque é daí que sai o seu Mapa. Leva em média de 10 a 20 minutos.</p>
+            <p className="rotulo-inicios">Não sabe por onde começar? Escolha uma frase:</p>
             <div className="inicios">
               {FRASES.map((f) => <button key={f} onClick={() => enviar(f)}>{f}</button>)}
             </div>

@@ -35,7 +35,16 @@ export async function registrarUso(conversaId: string | null, tipo: string, mode
   }
 }
 
-/** pede um objeto estruturado forçando uma ferramenta com o schema */
+/** remove palavras do JSON Schema que a saída estruturada não aceita */
+function schemaLimpo(v: unknown): unknown {
+  if (Array.isArray(v)) return v.map(schemaLimpo);
+  if (v && typeof v === "object") return Object.fromEntries(Object.entries(v).filter(([k]) => !["minimum", "maximum"].includes(k)).map(([k, x]) => [k, schemaLimpo(x)]));
+  return v;
+}
+
+export type Esforco = "low" | "medium" | "high";
+
+/** pede um objeto estruturado com saída em JSON Schema */
 export async function pedirJson<T>(opts: {
   conversaId: string | null;
   tipo: string;
@@ -44,20 +53,20 @@ export async function pedirJson<T>(opts: {
   user: string;
   schema: Record<string, unknown>;
   maxTokens?: number;
+  esforco?: Esforco;
 }): Promise<T> {
   const inicio = Date.now();
   const r = await anthropic().messages.create({
     model: opts.modelo,
-    max_tokens: opts.maxTokens ?? 4000,
+    max_tokens: opts.maxTokens ?? 8000,
     system: [{ type: "text", text: opts.system, cache_control: { type: "ephemeral" } }],
-    tools: [{ name: "responder", description: "Devolve a resposta estruturada.", input_schema: opts.schema as Anthropic.Tool.InputSchema }],
-    tool_choice: { type: "tool", name: "responder" },
+    output_config: { effort: opts.esforco ?? "low", format: { type: "json_schema", schema: schemaLimpo(opts.schema) as Record<string, unknown> } },
     messages: [{ role: "user", content: opts.user }],
   });
   await registrarUso(opts.conversaId, opts.tipo, opts.modelo, r.usage, Date.now() - inicio);
-  const bloco = r.content.find((b) => b.type === "tool_use");
-  if (!bloco || bloco.type !== "tool_use") throw new Error("resposta sem estrutura");
-  return bloco.input as T;
+  const texto = r.content.map((b) => (b.type === "text" ? b.text : "")).join("");
+  if (!texto.trim()) throw new Error(`resposta vazia (${r.stop_reason})`);
+  return JSON.parse(texto) as T;
 }
 
 /** tira travessões de qualquer texto que vá pra cliente */
