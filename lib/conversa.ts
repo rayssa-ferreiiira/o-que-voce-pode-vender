@@ -126,13 +126,14 @@ export async function falarRay(c: Conversa, mensagens: Mensagem[], nota: string,
   const stream = anthropic().messages.stream({
     model: MODELO_RAY,
     max_tokens: 4000,
-    thinking: { type: "disabled" },
+    output_config: { effort: "low" },
     system: [
       { type: "text", text: PROMPT_RAY, cache_control: { type: "ephemeral" } },
       { type: "text", text: notaRay(nota) },
     ],
     messages: comCache(paraMensagensApi(mensagens)),
   });
+  stream.on("error", (e) => console.error("ray stream", e));
   let texto = "";
   let pendente = "";
   stream.on("text", (d) => {
