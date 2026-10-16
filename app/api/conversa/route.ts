@@ -59,8 +59,10 @@ async function turno(req: Request) {
       try {
         // frase já apresentada: confere a confirmação antes de a Ray falar
         if (conversa.fase === "hipotese") {
-          const a = await anotar(conversa, mensagens);
-          if (a?.confirmou && !a.pediuAjuste) {
+          // concordância curta é confirmação, sem depender da leitura do anotador
+          const curta = texto.length <= 40 && /^(sim|s|faz|faz sim|faz sentido|faz todo sentido|isso|isso mesmo|é isso|e isso|é isso mesmo|exato|exatamente|ok|okay|perfeito|perfeita|concordo|pode ser|pode|gostei|amei|fechado|fechou|com certeza|claro|certo|tá certo|ta certo|está certo|bate|bateu)[\s!.,😊🙂❤️]*$/i.test(texto.trim());
+          const a = curta ? null : await anotar(conversa, mensagens);
+          if (curta || (a?.confirmou && !a.pediuAjuste)) {
             // ajuste depois do Mapa: o email já existe, só refaz
             const fase = conversa.email ? "concluida" : "email";
             const fala = conversa.email ? "Fechado. Já estou refazendo o seu Mapa com a frase nova." : FALA_EMAIL;
