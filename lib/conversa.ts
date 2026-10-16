@@ -152,12 +152,14 @@ export async function falarRay(c: Conversa, mensagens: Mensagem[], nota: string,
   return semTravessao(texto).trim();
 }
 
-export async function salvarConversa(id: string, patch: Partial<{ nome: string; mensagens: Mensagem[]; estado: Estado; fase: string; mapa_status: string; email: string }>) {
+/** salva campos da conversa; o estado é mesclado (nunca sobrescrito) pra não apagar a nota que o anotador acabou de gravar */
+export async function salvarConversa(id: string, patch: Partial<{ nome: string; mensagens: Mensagem[]; estado: Partial<Estado>; fase: string; mapa_status: string; email: string }>) {
   const sql = await db();
-  const campos: Record<string, unknown> = { ...patch, atualizado: new Date() };
+  const { estado, ...resto } = patch;
+  const campos: Record<string, unknown> = { ...resto, atualizado: new Date() };
   if (patch.mensagens) campos.mensagens = sql.json(patch.mensagens as never);
-  if (patch.estado) campos.estado = sql.json(patch.estado as never);
   await sql`update conversas set ${sql(campos)} where id = ${id}`;
+  if (estado) await sql`update conversas set estado = estado || ${sql.json(estado as never)} where id = ${id}`;
 }
 
 export { clientes, MAX_MENSAGENS_CLIENTE };
