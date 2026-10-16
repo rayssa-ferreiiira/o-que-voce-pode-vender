@@ -39,8 +39,15 @@ export default function Home() {
     if (new URLSearchParams(location.search).get("codigo") === "invalido") setErro("Esse link de acesso não vale. Confere o email da sua compra.");
   }, [carregar]);
 
+  // só acompanha o fim da conversa se ela já estiver lá embaixo
+  const colado = useRef(true);
   useEffect(() => {
-    fimRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    const aoRolar = () => { colado.current = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 120; };
+    addEventListener("scroll", aoRolar, { passive: true });
+    return () => removeEventListener("scroll", aoRolar);
+  }, []);
+  useEffect(() => {
+    if (colado.current) window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "auto" });
   }, [mensagens, falando]);
 
   useEffect(() => {
@@ -64,6 +71,7 @@ export default function Home() {
     setErro("");
     setTexto("");
     setFalando(true);
+    colado.current = true;
     const antes = mensagens;
     setMensagens([...antes, { autor: "cliente", texto: t }, { autor: "ray", texto: "" }]);
     try {

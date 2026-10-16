@@ -35,15 +35,16 @@ export function historiasComResultado(p?: Provas) {
 }
 
 export function provasSuficientes(p?: Provas): boolean {
-  return Boolean(p && historiasComResultado(p) >= 3 && distintos(p.padroes) >= 2 && p.demanda.trim() && p.jeitoAtuar.trim() && p.publico.trim());
+  return Boolean(p && historiasComResultado(p) >= 3 && distintos(p.padroes) >= 2 && p.demanda.trim() && p.jeitoAtuar.trim() && p.publico.trim() && p.foraDoTrabalho);
 }
 
 function faltando(p?: Provas): string {
-  if (!p || historiasComResultado(p) < 3) return "Ainda falta história concreta: busque uma de outra fase da vida dela, com o que ela fez e o resultado real (número ou antes e depois).";
+  if (!p || historiasComResultado(p) < 3) return "Ainda falta material concreto, mas não peça de novo 'uma situação'. Chegue por outro ângulo: quem procura ela e pra quê, o que ela faz fácil e os outros travam, alguém que ela ajudou a crescer, o começo da carreira, algo fora do trabalho. A história vem junto.";
   if (distintos(p.padroes) < 2) return "Já tem histórias de fases diferentes. Antes de pedir mais, devolva em voz alta os fios que ligam essas histórias.";
   if (!p.demanda.trim()) return "Falta entender quem procura ela e com que pedido concreto. Puxe isso a partir das histórias.";
   if (!p.jeitoAtuar.trim()) return "Falta entender como ela gosta de ajudar: naquela história ela fez por alguém, fez junto ou mostrou o caminho? Puxe naturalmente.";
-  return "Falta conhecer a pessoa que mais se beneficiaria e o momento em que ela está. Devolva o que já aparece e investigue esse contexto.";
+  if (!p.publico.trim()) return "Falta conhecer a pessoa que mais se beneficiaria e o momento em que ela está. Devolva o que já aparece e investigue esse contexto.";
+  return "Antes de fechar, abra uma vez a porta para a vida fora do trabalho, com exemplos dentro de uma pergunta natural. Se não render, siga para o fechamento.";
 }
 
 const clientes = (m: Mensagem[]) => m.filter((x) => x.autor === "cliente").length;

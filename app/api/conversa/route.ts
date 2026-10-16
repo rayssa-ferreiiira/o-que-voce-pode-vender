@@ -1,7 +1,7 @@
 import { after, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { db } from "@/lib/db";
-import { anotar, clientes, FALA_EMAIL, FRASES_INICIO, falarRay, fraseEmNegrito, MAX_MENSAGENS_CLIENTE, montarNota, provasDe, provasSuficientes, salvarConversa } from "@/lib/conversa";
+import { anotar, clientes, FALA_EMAIL, FRASES_INICIO, falarRay, fraseEmNegrito, MAX_MENSAGENS_CLIENTE, montarNota, provasDe, salvarConversa } from "@/lib/conversa";
 import { gerarMapa } from "@/lib/mapa";
 import { buscarConversa, COOKIE_CONVERSA, conversaAtual, opcoesCookie, temAcesso, type Conversa } from "@/lib/sessao";
 import type { Mensagem } from "@/lib/tipos";
@@ -73,7 +73,8 @@ export async function POST(req: Request) {
 
         // a frase em negrito só vale como hipótese quando o fechamento estava liberado
         const frase = fraseEmNegrito(resposta);
-        const liberado = provasSuficientes(conversa.estado.provas) || clientes(mensagens) >= 20 || conversa.fase === "hipotese";
+        // a Ray só usa negrito na frase final: se apareceu, a hipótese foi apresentada
+        const liberado = true;
         const fase = frase && liberado ? "hipotese" : conversa.fase;
         await salvarConversa(conversa.id, { mensagens: comRay, fase, estado: { ...conversa.estado, frase: frase && liberado ? frase : conversa.estado.frase } });
         enviar({ t: "fim", fase });
