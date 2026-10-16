@@ -14,7 +14,7 @@ export const PRECOS: Record<string, { entrada: number; saida: number; cacheEscri
 
 let _cliente: Anthropic | null = null;
 export function anthropic() {
-  if (!_cliente) _cliente = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  if (!_cliente) _cliente = new Anthropic({ apiKey: (process.env.ANTHROPIC_API_KEY ?? "").replace(/[^\x21-\x7e]/g, "") });
   return _cliente;
 }
 
