@@ -16,6 +16,7 @@ export type Estado = {
   nota?: string;
   provas?: Provas;
   frase?: string;
+  fraseEm?: number;
   devolutivaHa?: number;
 };
 

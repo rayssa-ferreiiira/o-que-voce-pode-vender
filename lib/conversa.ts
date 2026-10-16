@@ -50,13 +50,14 @@ function faltando(p?: Provas): string {
 const clientes = (m: Mensagem[]) => m.filter((x) => x.autor === "cliente").length;
 
 /** monta a nota que a Ray recebe na próxima fala, a partir do anotador e de regras fixas */
-export function montarNota(c: { nome: string; mensagens: Mensagem[]; fase: string }, a: Anotacao | null, provas: Provas | undefined): string {
+export function montarNota(c: { nome: string; mensagens: Mensagem[]; fase: string; estado?: Estado }, a: Anotacao | null, provas: Provas | undefined): string {
   const nome = c.nome || a?.nome || "";
   if (!nome) return "Você ainda não sabe o nome dela. Acolha o que ela trouxe em uma ou duas frases e pergunte só o primeiro nome, de forma leve.";
   const partes: string[] = [];
   if (a?.nota) partes.push(a.nota);
   if (c.fase === "hipotese") {
     if (a?.pediuAjuste) partes.push("Ela pediu um ajuste na frase. Ajuste palavra por palavra, sem recomeçar, e apresente a frase ajustada em negrito numa linha própria, perguntando se agora soa como ela.");
+    else if (clientes(c.mensagens) - (c.estado?.fraseEm ?? clientes(c.mensagens)) >= 2) partes.push("Ela ainda não respondeu se a frase soa como ela. Acolha o que ela trouxe em uma frase, integre se mudar algo, e traga de novo a frase em negrito numa linha própria, perguntando de forma direta se soa como ela.");
     else partes.push("A frase da hipótese já foi apresentada. Responda ao que ela trouxe e, se mudar alguma palavra, apresente a frase nova em negrito. Senão, não repita a frase inteira.");
     return partes.join(" ");
   }

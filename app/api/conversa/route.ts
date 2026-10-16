@@ -85,7 +85,7 @@ async function turno(req: Request) {
         // a Ray só usa negrito na frase final: se apareceu, a hipótese foi apresentada
         const liberado = true;
         const fase = frase && liberado ? "hipotese" : conversa.fase;
-        await salvarConversa(conversa.id, { mensagens: comRay, fase, estado: { ...conversa.estado, frase: frase && liberado ? frase : conversa.estado.frase } });
+        await salvarConversa(conversa.id, { mensagens: comRay, fase, estado: { ...conversa.estado, frase: frase || conversa.estado.frase, fraseEm: frase ? clientes(mensagens) : conversa.estado.fraseEm } });
         enviar({ t: "fim", fase });
         ctrl.close();
 
@@ -97,7 +97,7 @@ async function turno(req: Request) {
           if (!a) return;
           const provas = provasDe(a);
           const nome = atual.nome || a.nome.trim().slice(0, 80);
-          const estado = { ...atual.estado, provas, nota: montarNota({ nome, mensagens: comRay, fase: atual.fase }, a, provas) };
+          const estado = { ...atual.estado, provas, nota: montarNota({ nome, mensagens: comRay, fase: atual.fase, estado: atual.estado }, a, provas) };
           await salvarConversa(atual.id, { estado, nome });
         });
       } catch (e) {
