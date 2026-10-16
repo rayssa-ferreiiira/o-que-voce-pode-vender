@@ -92,6 +92,7 @@ export async function POST(req: Request) {
         });
       } catch (e) {
         console.error("conversa", e);
+        await (await db())`update conversas set erro = ${String(e instanceof Error ? e.message : e).slice(0, 500)} where id = ${conversa.id}`.catch(() => undefined);
         await salvarConversa(conversa.id, { mensagens: conversa.mensagens }).catch(() => undefined);
         enviar({ t: "erro", texto: "A Ray não conseguiu responder agora. Tenta mandar de novo." });
         ctrl.close();

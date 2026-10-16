@@ -16,7 +16,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
 
   const [urlP2, urlTrama] = await Promise.all([config("url_p2"), config("url_trama")]);
   return NextResponse.json(
-    { status: travado ? "gerando" : c.mapa_status === "nenhum" ? "gerando" : c.mapa_status, mapa: c.mapa, nome: c.nome, links: { p2: urlP2, trama: urlTrama } },
+    { status: travado ? "gerando" : c.mapa_status === "nenhum" ? "gerando" : c.mapa_status, mapa: c.mapa, nome: c.nome, links: { p2: urlP2, trama: urlTrama }, ...(c.mapa_status === "erro" ? { erro: (c as unknown as { erro?: string }).erro } : {}) },
     { headers: { "cache-control": "no-store" } },
   );
 }

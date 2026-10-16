@@ -36,6 +36,7 @@ create table if not exists conversas (
   atualizado timestamptz not null default now()
 );
 create index if not exists conversas_email on conversas (email);
+alter table conversas add column if not exists erro text;
 create table if not exists config (chave text primary key, valor text not null default '');
 create table if not exists uso_ia (
   id bigserial primary key,

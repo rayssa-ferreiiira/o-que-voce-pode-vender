@@ -108,6 +108,6 @@ export async function gerarMapa(id: string): Promise<void> {
   } catch (e) {
     if (e instanceof Error && e.message === "geração substituída") return;
     console.error("mapa", e);
-    await sql`update conversas set mapa_status = 'erro' where id = ${id} and mapa_iniciado = ${iniciado}`;
+    await sql`update conversas set mapa_status = 'erro', erro = ${String(e instanceof Error ? e.message : e).slice(0, 500)} where id = ${id} and mapa_iniciado = ${iniciado}`;
   }
 }
