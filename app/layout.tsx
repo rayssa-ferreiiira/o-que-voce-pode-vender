@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "O que você pode vender?",
-  description: "Descubra o que você pode vender a partir da experiência que já tem, no trabalho e fora dele.",
+  description: "Em 15 minutos, saia com o seu Mapa: o que você pode vender, pra quem e por onde começar, a partir da experiência que você já tem, no trabalho e fora dele.",
 };
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#F6F0E6" };
 
