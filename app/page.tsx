@@ -164,7 +164,7 @@ export default function Home() {
         {vazio ? (
           <div className="boas-vindas">
             <div className="selo" aria-hidden>R</div>
-            <h1>O que você pode vender?</h1>
+            <h1>O que você pode vender com o que já sabe?</h1>
             <p className="promessa">Em 15 minutos, saia com o seu Mapa: o que você pode vender, pra quem e por onde começar, a partir da experiência que você já tem, no trabalho e fora dele.</p>
             <p className="aviso-inicio">Esta é uma conversa investigativa. A Ray vai fazer bastante pergunta pra entender a sua trajetória, porque é daí que sai o seu Mapa. Leva em média 15 minutos.</p>
             <p className="rotulo-inicios">Não sabe por onde começar? Escolha uma frase:</p>
